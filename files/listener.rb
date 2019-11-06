@@ -3,18 +3,19 @@
 require 'rubygems'
 require 'sinatra'
 
+# Main class for listening magic
 class Listener < Sinatra::Base
-  def verbose msg
+  def verbose(msg)
     $stderr.puts msg if settings.verbose
   end
 
   helpers do
     def json_output(key, val)
-      %{{"#{key}" => "#{val}"}}
+      %({"#{key}" => "#{val}"})
     end
 
     def show_heads(repo_path)
-      %x{git --git-dir #{repo_path} show-ref --heads}
+      %x(`git --git-dir #{repo_path} show-ref --heads`)
     end
 
     def authenticate!(identifier)
@@ -32,7 +33,7 @@ class Listener < Sinatra::Base
       rescue => e
         msg = "Error reading allowed github repos: #{e.message}"
         verbose msg
-        halt 503, json_output("error", msg)
+        halt 503, json_output('error', msg)
       end
 
       if allowed.include? identifier
@@ -40,44 +41,40 @@ class Listener < Sinatra::Base
       else
         msg = "Authentication failed for '#{identifier}': no entry in .github-allowed"
         verbose msg
-        halt 403, json_output("error", msg)
+        halt 403, json_output('error', msg)
       end
     end
   end
 
-  before '/update/:user/:repo' do @identifier = "#{params[:user]}/#{params[:repo]}"
-    @repo_path  = "#{settings.basedir}/#{params[:user]}-#{params[:repo]}.git"
+  before '/update/:user/:repo' do
+    @identifier = "#{params[:user]}/#{params[:repo]}"
+    @repo_path = "#{settings.basedir}/#{params[:user]}-#{params[:repo]}.git"
     authenticate!(@identifier)
   end
 
   get '/update/:user/:repo' do
-
-    if File.directory? @repo_path
-      return [200, json_output("heads", show_heads(@repo_path))]
-    else
-      return [412, json_output("error", "#{@identifier} allowed but not cloned")]
-    end
+    return [200, json_output('heads', show_heads(@repo_path))] unless File.directory? @repo_path
+    return [412, json_output('error', "#{@identifier} allowed but not cloned")]
   end
 
   post '/update/:user/:repo' do
-
     if File.directory? @repo_path
       # If the requested directory exists and is allowed, pull it.
       # Otherwise, log to stderr/apache error.log why things failed
       # and 404
 
-      cmd = %Q{git --git-dir #{@repo_path} fetch --all --verbose --prune}
-      verbose %Q{Updating repo #{@identifier} with command "#{cmd}"}
+      cmd = %(git --git-dir #{@repo_path} fetch --all --verbose --prune)
+      verbose %(Updating repo #{@identifier} with command "#{cmd}")
       system(cmd)
 
-      return [202, json_output("heads", show_heads(@repo_path))]
+      return [202, json_output('heads', show_heads(@repo_path))]
     else
       verbose "Nonexistent repo #{@repo_path}"
-      return [412, json_output("error", "#{@identifier} allowed but not cloned")]
+      return [412, json_output('error', "#{@identifier} allowed but not cloned")]
     end
   end
 
   not_found do
-    [404, json_output("error", "not found")]
+    [404, json_output('error', 'not found')]
   end
 end
