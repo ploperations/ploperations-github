@@ -13,6 +13,7 @@ class github::listener {
   $wwwroot    = $github::params::wwwroot
   $vhost_name = $github::params::vhost_name
   $verbose    = $github::params::verbose
+  $log_dir    = $github::params::http_log_dir
 
   file {
     "${wwwroot}/config.ru":
@@ -62,10 +63,11 @@ class github::listener {
   }
 
   apache::vhost { $vhost_name:
-    port     => "4567",
-    priority => "20",
-    docroot  => "${wwwroot}/public",
-    ssl      => false,
-    template => "github/github-listener.conf.erb",
+    port         => "4567",
+    priority     => "20",
+    docroot      => "${wwwroot}/public",
+    ssl          => false,
+    http_log_dir => $log_dir,
+    template     => "github/github-listener.conf.erb",
   }
 }
