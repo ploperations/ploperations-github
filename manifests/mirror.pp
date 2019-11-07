@@ -23,10 +23,10 @@ define github::mirror (
   }
 
   case $ensure {
-    present: {
+    'present': {
 
       exec { "git clone --mirror ${repo_url} ${repo_path}":
-        path      => [ "/bin", "/usr/bin", "/opt/local/bin" ],
+        path      => [ '/bin', '/usr/bin', '/opt/local/bin' ],
         cwd       => $basedir,
         creates   => $repo_path,
         user      => $user,
@@ -43,7 +43,7 @@ define github::mirror (
         target  => "${basedir}/.github-allowed",
       }
     }
-    absent: {
+    'absent': {
       file { $repo_path:
         ensure  => absent,
         force   => true,
@@ -58,7 +58,7 @@ define github::mirror (
     }
 
     default: {
-      fail("Invalid ensure value $ensure on github::mirror $name")
+      fail("Invalid ensure value ${ensure} on github::mirror ${name}")
     }
   }
 }
