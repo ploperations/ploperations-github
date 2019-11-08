@@ -1,11 +1,12 @@
-# Class: github::listener
+# Deploys the rack app that responds to the github post-receive hook
 #
-# deploys the rack app that responds to the github post-receive hook
+# @summary
+#   deploys the rack app that responds to the github post-receive hook
 #
-# TODO doc
 class github::listener {
   include apache
   include apache::mod::passenger
+  include github::params
 
   $user       = $github::params::user
   $group      = $github::params::group

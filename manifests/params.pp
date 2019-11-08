@@ -1,15 +1,7 @@
-# Class: github::params
+# @summary
+# This class provides for the overriding of the default user, group, and basedir
 #
-# This class provides for the overriding of the default user, group, and
-# basedir
-#
-# Parameters:
-#   - user
-#   - group
-#   - basedir
-#   - wwwroot
-#   - vhost_name
-#   - verbose
+# @api private
 class github::params (
   $user         = 'git',
   $group        = 'git',

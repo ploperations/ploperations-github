@@ -1,8 +1,13 @@
 # github
 
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
+![](https://img.shields.io/puppetforge/pdk-version/ploperations/ploperations-github.svg?style=popout)
+![](https://img.shields.io/puppetforge/v/ploperations/ploperations-github.svg?style=popout)
+![](https://img.shields.io/puppetforge/dt/ploperations/ploperations-github.svg?style=popout)
+[![Build Status](https://travis-ci.org/ploperations/ploperations-ploperations-github.svg?branch=master)](https://travis-ci.org/ploperations/ploperations-ploperations-github)
 
-The README template below provides a starting point with details about what information to include in your README.
+This module mirrors your GitHub repos locally, so that you can rapidly create and destroy repositories before the heat death of the universe!
+
+> NOTE: this module currently uses a private fork of the apache module. We are working to migrate it to the normal version of apache and plan to release it on the Forge after that.
 
 #### Table of Contents
 
@@ -17,33 +22,17 @@ The README template below provides a starting point with details about what info
 
 ## Description
 
-Mirror your massive GitHub repos locally, so that you can rapidly create and destroy repositories before the heat death of the universe!
+Mirroring github repos creates a replica of the authoritative repository.
+
+Mirroring is quite common and is used to distribute content (in this case, source code) faster and reduces load on the primary service.
+
+Also great for air-gapped networks.
 
 ## Setup
 
-### What github affects **OPTIONAL**
-
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
-
-If there's more that they should know about, though, this is the place to mention:
-
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
-
 ### Beginning with github
 
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
-
-## Usage
-
-Some examples:
+Here are some examples:
 
 ```
 class { "github::params":
@@ -72,39 +61,12 @@ github::mirror {
 
 ## Reference
 
-This section is deprecated. Instead, add reference information to your code as Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your module. For details on how to add code comments and generate documentation with Strings, see the Puppet Strings [documentation](https://puppet.com/docs/puppet/latest/puppet_strings.html) and [style guide](https://puppet.com/docs/puppet/latest/puppet_strings_style.html)
+This module is documented via
+`pdk bundle exec puppet strings generate --format markdown`.
+Please see [REFERENCE.md](REFERENCE.md) for more info.
 
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the root of your module directory and list out each of your module's classes, defined types, facts, functions, Puppet tasks, task plans, and resource types and providers, along with the parameters for each.
+## Changelog
 
-For each element (class, defined type, function, and so on), list:
-
-  * The data type, if applicable.
-  * A description of what the element does.
-  * Valid values, if the data type doesn't make it obvious.
-  * Default value, if any.
-
-For example:
-
-```
-### `pet::cat`
-
-#### Parameters
-
-##### `meow`
-
-Enables vocalization in your cat. Valid options: 'string'.
-
-Default: 'medium-loud'.
-```
-
-## Limitations
-
-In the Limitations section, list any incompatibilities, known issues, or other warnings.
-
-## Development
-
-In the Development section, tell other users the ground rules for contributing to your project and how they should submit their work.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You can also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
+[CHANGELOG.md](CHANGELOG.md) is generated prior to each release via
+`pdk bundle exec rake changelog`. This proecss relies on labels that are applied
+to each pull request.
