@@ -64,11 +64,19 @@ class github::listener {
   }
 
   apache::vhost { $vhost_name:
-    port         => '4567',
-    priority     => '20',
-    docroot      => "${wwwroot}/public",
-    ssl          => false,
-    http_log_dir => $log_dir,
-    template     => 'github/github-listener.conf.erb',
+    port        => '4567',
+    priority    => '20',
+    docroot     => "${wwwroot}/public",
+    ssl         => false,
+    directories => [
+      {
+        'path'    => "${wwwroot}/public",
+        'allow'   => 'from all',
+        'options' => '-MultiViews',
+      },
+    ],
+    log_level   => 'warn',
+    logroot     => $log_dir,
+    access_log  => true,
   }
 }
