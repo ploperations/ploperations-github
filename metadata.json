@@ -2,11 +2,13 @@
   "name": "ploperations-github",
   "version": "0.1.0",
   "author": "Adrien Thebo",
-  "summary": "",
+  "summary": "Mirror GitHub repos locally",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/ploperations/ploperations-github.git",
+  "project_page": "https://github.com/ploperations/ploperations-github",
+  "issues_url": "https://github.com/ploperations/ploperations-github/issues",
   "dependencies": [
-
+    { "name": "puppetlabs/apache", "version_requirement": ">= 5.2.0 < 6.0.0" }
   ],
   "operatingsystem_support": [
     {

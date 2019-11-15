@@ -1,9 +1,19 @@
-# Class: github::mirror
+# Defined type that creates a github mirror for a given repo
 #
+# @summary Defined type that creates a github mirror for a given repo
+#
+# @param ensure
+#   Can be either `present` or `absent`. Create the resource or ensure its absence. Defaults to `present`
+#
+# @param private
+#   Whether or not the repo will be public or private. Deafults to `false`
+#
+# @param exportable
+#   Can be `true` / `false`. Whether or not to add the file `git-daemon-export-ok` and allow exports
 define github::mirror (
-  $ensure     = present,
-  $private    = false,
-  $exportable = false
+  Enum['present','absent'] $ensure = present,
+  Boolean $private                 = false,
+  Boolean $exportable              = false
 ) {
   include github::listener
 

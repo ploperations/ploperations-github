@@ -1,11 +1,12 @@
-# Class: github::listener
+# Deploys the rack app that responds to the github post-receive hook
 #
-# deploys the rack app that responds to the github post-receive hook
+# @summary
+#   deploys the rack app that responds to the github post-receive hook
 #
-# TODO doc
 class github::listener {
   include apache
   include apache::mod::passenger
+  include github::params
 
   $user       = $github::params::user
   $group      = $github::params::group
@@ -63,11 +64,19 @@ class github::listener {
   }
 
   apache::vhost { $vhost_name:
-    port         => '4567',
-    priority     => '20',
-    docroot      => "${wwwroot}/public",
-    ssl          => false,
-    http_log_dir => $log_dir,
-    template     => 'github/github-listener.conf.erb',
+    port        => '4567',
+    priority    => '20',
+    docroot     => "${wwwroot}/public",
+    ssl         => false,
+    directories => [
+      {
+        'path'    => "${wwwroot}/public",
+        'allow'   => 'from all',
+        'options' => '-MultiViews',
+      },
+    ],
+    log_level   => 'warn',
+    logroot     => $log_dir,
+    access_log  => true,
   }
 }
