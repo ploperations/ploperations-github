@@ -7,8 +7,6 @@
 
 This module mirrors your GitHub repos locally, so that you can rapidly create and destroy repositories before the heat death of the universe!
 
-> NOTE: this module currently uses a private fork of the apache module. We are working to migrate it to the normal version of apache and plan to release it on the Forge after that.
-
 #### Table of Contents
 
 1. [Description](#description)
