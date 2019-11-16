@@ -1,7 +1,7 @@
 {
   "name": "ploperations-github",
-  "version": "0.1.0",
-  "author": "Adrien Thebo",
+  "version": "1.0.0",
+  "author": "ploperations",
   "summary": "Mirror GitHub repos locally",
   "license": "Apache-2.0",
   "source": "https://github.com/ploperations/ploperations-github.git",
