@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.0.1](https://github.com/ploperations/ploperations-github/tree/1.0.1) (2019-11-18)
+
+[Full Changelog](https://github.com/ploperations/ploperations-github/compare/1.0.0...1.0.1)
+
+### Fixed
+
+- Fix badges in README.md [\#5](https://github.com/ploperations/ploperations-github/pull/5) ([genebean](https://github.com/genebean))
+
+## [1.0.0](https://github.com/ploperations/ploperations-github/tree/1.0.0) (2019-11-18)
+
+[Full Changelog](https://github.com/ploperations/ploperations-github/compare/0.1.0...1.0.0)
+
 ## [0.1.0](https://github.com/ploperations/ploperations-github/tree/0.1.0) (2019-11-06)
 
 [Full Changelog](https://github.com/ploperations/ploperations-github/compare/bd52c2fbd4fb703abe284abdbc117c9e1220f612...0.1.0)
