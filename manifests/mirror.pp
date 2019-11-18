@@ -10,6 +10,31 @@
 #
 # @param exportable
 #   Can be `true` / `false`. Whether or not to add the file `git-daemon-export-ok` and allow exports
+#
+# @example Getting started scenario
+#   class { "github::params":
+#     user       => "gitmirror",
+#     group      => "gitmirror",
+#     basedir    => "/home/gitmirror",
+#     wwwroot    => "/var/www/gitmirror",
+#     vhost_name => "git",
+#   }
+#
+#   file { "/var/www/gitmirror":
+#     ensure => directory,
+#     owner  => "gitmirror",
+#     group  => "gitmirror",
+#     mode   => "0755",
+#   }
+#
+#   github::mirror {
+#     "puppetlabs/puppet":
+#       ensure => present;
+#     "supersecret/world-domination-plans":
+#       ensure  => present,
+#       private => true;
+#   }
+#
 define github::mirror (
   Enum['present','absent'] $ensure = present,
   Boolean $private                 = false,

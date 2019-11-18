@@ -5,13 +5,8 @@
 
 **Classes**
 
-_Public Classes_
-
 * [`github::listener`](#githublistener): deploys the rack app that responds to the github post-receive hook
-
-_Private Classes_
-
-* `github::params`: This class provides for the overriding of the default user, group, and basedir
+* [`github::params`](#githubparams): Allows for overriding defaults used within the module
 
 **Defined types**
 
@@ -23,11 +18,118 @@ _Private Classes_
 
 Deploys the rack app that responds to the github post-receive hook
 
+### github::params
+
+Allows for overriding defaults used within the module
+
+#### Examples
+
+##### 
+
+```puppet
+class { "github::params":
+  user       => "gitmirror",
+  group      => "gitmirror",
+  basedir    => "/home/gitmirror",
+  wwwroot    => "/var/www/gitmirror",
+  vhost_name => "git",
+}
+```
+
+#### Parameters
+
+The following parameters are available in the `github::params` class.
+
+##### `user`
+
+Data type: `String[1]`
+
+The user on the mirror files will be owned by
+
+Default value: 'git'
+
+##### `group`
+
+Data type: `String[1]`
+
+The group on the mirror files will be owned by
+
+Default value: 'git'
+
+##### `wwwroot`
+
+Data type: `Stdlib::Absolutepath`
+
+The document root for Apache
+
+Default value: '/var/www/html'
+
+##### `basedir`
+
+Data type: `Stdlib::Absolutepath`
+
+The path into which repositories will be cloned
+
+Default value: '/home/git'
+
+##### `vhost_name`
+
+Data type: `String[1]`
+
+The name of the Apache vhost for the mirror
+
+Default value: 'git'
+
+##### `verbose`
+
+Data type: `Boolean`
+
+Enable verbose output from the Sinatra webapp
+
+Default value: `false`
+
+##### `http_log_dir`
+
+Data type: `Stdlib::Absolutepath`
+
+Where to store the logs from Apache
+
+Default value: '/var/log/apache2'
+
 ## Defined types
 
 ### github::mirror
 
 Defined type that creates a github mirror for a given repo
+
+#### Examples
+
+##### Getting started scenario
+
+```puppet
+class { "github::params":
+  user       => "gitmirror",
+  group      => "gitmirror",
+  basedir    => "/home/gitmirror",
+  wwwroot    => "/var/www/gitmirror",
+  vhost_name => "git",
+}
+
+file { "/var/www/gitmirror":
+  ensure => directory,
+  owner  => "gitmirror",
+  group  => "gitmirror",
+  mode   => "0755",
+}
+
+github::mirror {
+  "puppetlabs/puppet":
+    ensure => present;
+  "supersecret/world-domination-plans":
+    ensure  => present,
+    private => true;
+}
+```
 
 #### Parameters
 
