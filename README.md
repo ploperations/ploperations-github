@@ -7,16 +7,10 @@
 
 This module mirrors your GitHub repos locally, so that you can rapidly create and destroy repositories before the heat death of the universe!
 
-#### Table of Contents
-
-1. [Description](#description)
-2. [Setup - The basics of getting started with github](#setup)
-    * [What github affects](#what-github-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with github](#beginning-with-github)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
+- [Description](#description)
+- [Beginning with github](#beginning-with-github)
+- [Reference](#reference)
+- [Changelog](#changelog)
 
 ## Description
 
@@ -26,36 +20,9 @@ Mirroring is quite common and is used to distribute content (in this case, sourc
 
 Also great for air-gapped networks.
 
-## Setup
+## Beginning with github
 
-### Beginning with github
-
-Here are some examples:
-
-```
-class { "github::params":
-  user       => "gitmirror",
-  group      => "gitmirror",
-  basedir    => "/home/gitmirror",
-  wwwroot    => "/var/www/gitmirror",
-  vhost_name => "git",
-}
-
-file { "/var/www/gitmirror":
-  ensure => directory,
-  owner  => "gitmirror",
-  group  => "gitmirror",
-  mode   => "0755",
-}
-
-github::mirror {
-  "puppetlabs/puppet":
-    ensure => present;
-  "supersecret/world-domination-plans":
-    ensure  => present,
-    private => true;
-}
-```
+See the example listed with `github::mirror` in [REFERENCE.md](REFERENCE.md)
 
 ## Reference
 
