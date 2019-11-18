@@ -1,9 +1,9 @@
 # github
 
-![](https://img.shields.io/puppetforge/pdk-version/ploperations/ploperations-github.svg?style=popout)
-![](https://img.shields.io/puppetforge/v/ploperations/ploperations-github.svg?style=popout)
-![](https://img.shields.io/puppetforge/dt/ploperations/ploperations-github.svg?style=popout)
-[![Build Status](https://travis-ci.org/ploperations/ploperations-ploperations-github.svg?branch=master)](https://travis-ci.org/ploperations/ploperations-ploperations-github)
+![](https://img.shields.io/puppetforge/pdk-version/ploperations/github.svg?style=popout)
+![](https://img.shields.io/puppetforge/v/ploperations/github.svg?style=popout)
+![](https://img.shields.io/puppetforge/dt/ploperations/github.svg?style=popout)
+[![Build Status](https://travis-ci.org/ploperations/ploperations-github.svg?branch=master)](https://travis-ci.org/ploperations/ploperations-github)
 
 This module mirrors your GitHub repos locally, so that you can rapidly create and destroy repositories before the heat death of the universe!
 
