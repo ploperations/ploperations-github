@@ -40,4 +40,4 @@ class github::params (
   String[1] $vhost_name              = 'git',
   Boolean $verbose                   = false,
   Stdlib::Absolutepath $http_log_dir = '/var/log/apache2',
-) { }
+) {}

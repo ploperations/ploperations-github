@@ -59,9 +59,8 @@ define github::mirror (
 
   case $ensure {
     'present': {
-
       exec { "git clone --mirror ${repo_url} ${repo_path}":
-        path      => [ '/bin', '/usr/bin', '/opt/local/bin' ],
+        path      => ['/bin', '/usr/bin', '/opt/local/bin'],
         cwd       => $basedir,
         creates   => $repo_path,
         user      => $user,

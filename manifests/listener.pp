@@ -18,13 +18,13 @@ class github::listener {
 
   file {
     "${wwwroot}/config.ru":
-      ensure  => present,
+      ensure  => file,
       content => template('github/config.ru.erb'),
       owner   => $user,
       group   => $group,
       mode    => '0644';
     "${wwwroot}/listener.rb":
-      ensure => present,
+      ensure => file,
       source => 'puppet:///modules/github/listener.rb',
       owner  => $user,
       group  => $group,
@@ -42,7 +42,7 @@ class github::listener {
   }
 
   exec { "touch ${wwwroot}/tmp/restart.txt":
-    path        => [ '/usr/bin', '/bin' ],
+    path        => ['/usr/bin', '/bin'],
     user        => $user,
     group       => $group,
     refreshonly => true,
